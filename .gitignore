@@ -21,4 +21,8 @@
 .byebug_history
 .data
 *.swp
+.env
+.env.production
+.env.test
+.env.development
 

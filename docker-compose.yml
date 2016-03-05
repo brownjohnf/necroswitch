@@ -3,14 +3,23 @@ api:
   build: .
   ports:
     - "3000"
+  environment:
+    MYSQL_HOST: mysql
+    MYSQL_PORT: 3306
+    MYSQL_USERNAME: root
+    MYSQL_PASSWORD: toor
+    TWILIO_ACCOUNT_SID: foo
+    TWILIO_AUTH_TOKEN: bar
   volumes:
     - ./:/src
+  links:
+    - db:mysql
 db:
   image: library/mariadb:latest
   ports:
     - "3306:3306"
   environment:
     MYSQL_ROOT_PASSWORD: toor
-  volumes:
-    - .data/mariadb:/var/lib/mysql
+  #volumes:
+  #  - .data/mariadb:/var/lib/mysql
 
