@@ -1,6 +1,10 @@
 namespace :switches do
   task check: :environment do
-    Switch.check
+    loop do
+      Switch.check
+
+      sleep 60
+    end
   end
 end
 

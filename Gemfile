@@ -10,6 +10,7 @@ gem 'mysql2'
 gem 'puma'
 gem "active_model_serializers", '~> 0.10.0.rc1'
 gem 'twilio-ruby', '~> 4.11.1'
+gem "foreman"
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.0'

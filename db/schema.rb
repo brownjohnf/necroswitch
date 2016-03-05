@@ -23,16 +23,16 @@ ActiveRecord::Schema.define(version: 20160304201500) do
   add_index "events", ["switch_uuid"], name: "index_events_on_switch_uuid", using: :btree
 
   create_table "switches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "uuid",                            null: false
+    t.string   "uuid",                           null: false
     t.string   "name"
     t.string   "email"
     t.string   "sms"
-    t.integer  "interval",                        null: false
-    t.boolean  "active",          default: false
+    t.integer  "interval",                       null: false
+    t.boolean  "active",          default: true
     t.datetime "last_checked_at"
     t.boolean  "last_check_ok",   default: true
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   add_index "switches", ["uuid"], name: "index_switches_on_uuid", unique: true, using: :btree
