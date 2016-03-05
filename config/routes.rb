@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   constraints(uuid: /[a-z0-9\-]+/) do
-    resources :switches, param: :uuid do
-      resources :events
+    resources :switches, param: :uuid, only: [:show, :create, :update, :destroy] do
+      resources :events, only: [:index, :show, :create]
     end
   end
 

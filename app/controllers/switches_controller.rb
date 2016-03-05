@@ -1,13 +1,6 @@
 class SwitchesController < ApplicationController
   before_action :set_switch, only: [:show, :update, :destroy]
 
-  # GET /switches
-  def index
-    @switches = Switch.all
-
-    render json: @switches
-  end
-
   # GET /switches/1
   def show
     render json: @switch

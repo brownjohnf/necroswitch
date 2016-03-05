@@ -30,7 +30,7 @@ class Switch < ApplicationRecord
     def check
       Switch.find_each do |switch|
         unless switch.active
-          warn "skipping switch because it's inactive: " + switch.name
+          warn "skipping switch because it's inactive: " + switch.long_name
           next
         end
 
@@ -87,10 +87,14 @@ class Switch < ApplicationRecord
     false
   end
 
-  def send_notifications(opt)
-    warn "sending message #{opt} for switch #{name}"
+  def long_name
+    "%s (%s)" % [ self.name, self.uuid.first(8) ]
+  end
 
-    message = MESSAGES[opt] % [ self.name, Time.now ]
+  def send_notifications(opt)
+    warn "sending message #{opt} for switch #{long_name}"
+
+    message = MESSAGES[opt] % [ long_name, Time.now ]
 
     send_sms(message)
     send_email(message)
