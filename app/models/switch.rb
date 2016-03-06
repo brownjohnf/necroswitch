@@ -50,8 +50,10 @@ class Switch < ApplicationRecord
   end
 
   def check
-    # Return if it's not time to check yet
-    return true if self.last_checked_at > ( Time.now - self.interval )
+    # Return if it's not time to check yet and it's not currently failing
+    if last_check_ok && self.last_checked_at > ( Time.now - self.interval )
+      return true
+    end
 
     last_event = self.events.order("created_at DESC").first
 
@@ -67,7 +69,7 @@ class Switch < ApplicationRecord
     end
 
     # All is well
-    if last_event.created_at > self.last_checked_at && self.last_check_ok == true
+    if last_event.created_at > self.last_checked_at && self.last_check_ok
       update_attributes!({
         last_checked_at: Time.now,
       })

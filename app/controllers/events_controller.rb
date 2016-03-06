@@ -16,7 +16,8 @@ class EventsController < ApplicationController
 
   # POST /events
   def create
-    @event = @switch.events.build(event_params)
+    @event = @switch.events.build(event_params.merge(ip: request.ip))
+    puts @event.inspect
 
     if @event.save
       render json: @event, status: :created, location: switch_event_path(@switch, @event)
