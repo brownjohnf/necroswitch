@@ -25,4 +25,5 @@
 .env.production
 .env.test
 .env.development
+tags
 

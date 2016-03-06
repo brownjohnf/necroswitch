@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304201500) do
+ActiveRecord::Schema.define(version: 20160306064504) do
+
+  create_table "api_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "key"
+    t.string   "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "switch_uuid"
@@ -24,6 +31,7 @@ ActiveRecord::Schema.define(version: 20160304201500) do
 
   create_table "switches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "uuid",                           null: false
+    t.integer  "api_key_id"
     t.string   "name"
     t.string   "email"
     t.string   "sms"

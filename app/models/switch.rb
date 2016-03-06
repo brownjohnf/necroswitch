@@ -8,7 +8,17 @@ class Switch < ApplicationRecord
   validates :interval,
     presence: true
 
-  has_many :events, foreign_key: :switch_uuid, primary_key: :uuid, inverse_of: :switch
+  validates :api_key,
+    presence: true
+
+  has_many :events,
+    foreign_key: :switch_uuid,
+    primary_key: :uuid,
+    inverse_of: :switch,
+    dependent: :destroy
+
+  belongs_to :api_key,
+    inverse_of: :switches
 
   before_validation do
     self.uuid ||= SecureRandom.uuid
@@ -50,7 +60,7 @@ class Switch < ApplicationRecord
 
       update_attributes!({
         last_checked_at: Time.now,
-        last_check_ok: true,
+        last_check_ok: false,
       })
 
       return false
@@ -105,14 +115,14 @@ class Switch < ApplicationRecord
 
     # Send an SMS
     NecroTwilio.client.messages.create({
-      from: '+12065391125',
+      from: ENV["TWILIO_FROM_NUMBER"],
       to: self.sms,
       body: message,
     })
   end
 
   def send_email(message)
-    return "not implemented"
+    SwitchMailer.message_email(self, message).deliver_later
   end
 end
 

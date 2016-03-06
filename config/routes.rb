@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+  constraints(key: /[a-z0-9\-]+/) do
+    resources :api_keys, only: [:create, :show, :destroy]
+  end
+
   constraints(uuid: /[a-z0-9\-]+/) do
-    resources :switches, param: :uuid, only: [:show, :create, :update, :destroy] do
+    resources :switches, param: :uuid, only: [:index, :show, :create, :update, :destroy] do
       resources :events, only: [:index, :show, :create]
     end
   end

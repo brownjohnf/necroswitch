@@ -1,5 +1,11 @@
 class SwitchesController < ApplicationController
   before_action :set_switch, only: [:show, :update, :destroy]
+  before_action :set_api_key, only: [:index, :create]
+
+  # GET /switches?api_key=<string>
+  def index
+    render json: @api_key.switches
+  end
 
   # GET /switches/1
   def show
@@ -8,7 +14,7 @@ class SwitchesController < ApplicationController
 
   # POST /switches
   def create
-    @switch = Switch.new(switch_params)
+    @switch = @api_key.switches.build(switch_params)
 
     if @switch.save
       render json: @switch, status: :created, location: @switch
@@ -36,6 +42,10 @@ class SwitchesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_switch
     @switch = Switch.find_by(uuid: params[:uuid])
+  end
+
+  def set_api_key
+    @api_key = ApiKey.find_by(key: params[:api_key])
   end
 
   # Only allow a trusted parameter "white list" through.
