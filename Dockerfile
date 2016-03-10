@@ -1,7 +1,7 @@
 FROM        library/ruby:2.3.0
 
 WORKDIR     /src
-CMD         bundle exec rails s -p 3000 -b 0.0.0.0
+CMD         foreman start
 ENV         WEB_ROOT /src
 
 COPY        Gemfile       Gemfile

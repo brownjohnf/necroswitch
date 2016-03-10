@@ -14,6 +14,21 @@ api:
     - ./:/src
   links:
     - db:mysql
+  command: foreman start api
+scheduler:
+  build: .
+  environment:
+    MYSQL_HOST: mysql
+    MYSQL_PORT: 3306
+    MYSQL_USERNAME: root
+    MYSQL_PASSWORD: toor
+    TWILIO_ACCOUNT_SID: foo
+    TWILIO_AUTH_TOKEN: bar
+  volumes:
+    - ./:/src
+  links:
+    - db:mysql
+  command: foreman start worker
 db:
   image: library/mariadb:latest
   ports:
