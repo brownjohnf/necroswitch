@@ -30,10 +30,10 @@ class Switch < ApplicationRecord
   end
 
   MESSAGES = {
-    no_data: "Necroswitch '%s' has received no events as of %s",
-    created: "Necroswitch '%s' created at %s",
-    failed: "Necroswitch '%s' failed at %s",
-    recovered: "Necroswitch '%s' was failing, but recovered at %s",
+    no_data: "LiveSwitch '%s' has received no events as of %s",
+    created: "LiveSwitch '%s' created at %s",
+    failed: "LiveSwitch '%s' failed at %s",
+    recovered: "LiveSwitch '%s' was failing, but recovered at %s",
   }
 
   class << self
