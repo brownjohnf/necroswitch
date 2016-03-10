@@ -10,6 +10,7 @@ api:
     MYSQL_PASSWORD: toor
     TWILIO_ACCOUNT_SID: foo
     TWILIO_AUTH_TOKEN: bar
+    SECRET_KEY_BASE: foobar
   volumes:
     - ./:/src
   links:
